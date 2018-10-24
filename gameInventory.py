@@ -1,6 +1,6 @@
 # This is the file where you must work. Write code in the functions, create new functions,
 # so they work according to the specification
-import csv
+
 # Displays the inventory.
 
 
@@ -72,4 +72,7 @@ def import_inventory(inventory, filename="import_inventory.csv"):
 def export_inventory(inventory, filename="export_inventory.csv"):
     with open(filename, 'w') as file:
         for value in inventory:
-            file.write((value + ',') * inventory[value])
+            a = ((value + ',') * inventory[value])
+            if a.endswith(','):
+                a = a[:-1]
+                file.write(a)
