@@ -72,4 +72,4 @@ def import_inventory(inventory, filename="import_inventory.csv"):
 def export_inventory(inventory, filename="export_inventory.csv"):
     with open(filename, 'w') as file:
         for value in inventory:
-            print((value + ',') * inventory[value])
+            file.write((value + ',') * inventory[value])
