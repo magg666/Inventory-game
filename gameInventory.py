@@ -1,6 +1,6 @@
 # This is the file where you must work. Write code in the functions, create new functions,
 # so they work according to the specification
-
+import csv
 # Displays the inventory.
 
 
@@ -63,16 +63,35 @@ def import_inventory(inventory, filename="import_inventory.csv"):
                     inventory[item] += 1
                 if item not in inventory:
                     inventory[item] = 1
-
-
 # Exports the inventory into a .csv file.
 # if the filename argument is None it creates and overwrites a file
 # called "export_inventory.csv". The file format is the same plain text
 # with comma separated values (CSV).
+
+
 def export_inventory(inventory, filename="export_inventory.csv"):
+    l3 = []
+    l1 = []
+    l2 = []
+    l4 = []
+    for value in inventory:
+        l3.append((value,) * inventory[value])
+    for n in range(len(l3)):
+        l1.append(','.join(l3[n]))
+    for i in l1:
+        l2.append(i.split(','))
+    for line in l2:
+        for item in line:
+            l4.append(item)
     with open(filename, 'w') as file:
-        for value in inventory:
-            a = ((value + ',') * inventory[value])
-            if a.endswith(','):
-                a = a[:-1]
-                file.write(a)
+        wr = csv.writer(file)
+        wr.writerow(l4)
+
+
+def make_list_all(file_name):
+    with open(file_name, 'r') as file:
+        set_of_all = file.read()
+        set_of_all = set_of_all.replace('\n', '\t')
+        set_of_all = set_of_all.split('\t')
+        del set_of_all[-1]
+        return set_of_all
